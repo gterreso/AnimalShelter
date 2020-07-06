@@ -1,0 +1,39 @@
+<div>
+    <a href="./admin/animal/add" class="btn btn-primary">Add Animal</a>
+   
+    <ng-container *ngIf='animals | async as animals'>
+    <table class="table table-hover" >
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Specie</th>
+            <th>Breed</th>
+            <th>Birth Date</th>
+            <th>Death Date</th>
+            <th>Age</th>
+            <th>Vaccinated</th>
+            <th>Sex</th>
+            <th>Weight</th>
+            <th>State</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let animal of animals">
+            <td>{{animal.name}}</td>
+            <td>{{animal.breed.species.name}}</td>
+            <td>{{animal.breed.name}}</td>
+            <td>{{animal.birthDate}}</td>
+            <td>{{animal.deathDate}}</td>
+            <td>{{animal | calculateAnimalYears}}</td>
+            <td>{{animal.vaccinated}}</td>
+            <td>{{animal.sex}}</td>
+            <td>{{animal.weight}}</td>
+            <td>{{animal.state.name}}</td>
+            <td><a (click)="delete(animal)"><i class="fa fa-times"> &nbsp;&nbsp;&nbsp;</i></a><a href="./admin/animal/edit/{{animal.id}}"><i class="fa fa-pencil"></i></a></td>
+        </tr>
+    </tbody>
+    </table>
+</ng-container>
+</div>
+

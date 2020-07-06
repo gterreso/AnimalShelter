@@ -1,0 +1,84 @@
+<a class="btn bg-primary text-light" (click)="backButton()">Back</a>
+<br>
+<br>
+<form>
+    <div class="form-group">
+        <label for="name">Name:</label><br>
+        <input class="form-control" type="text" id="name" name="name" [(ngModel)]="animal.name">
+    </div>
+
+    <div class="form-group">
+        <label for="species">Species:</label><br>
+        <ng-container *ngIf='speciesOptions | async as speciesOptions'>
+            <select class="form-control" id="species" name="name" [(ngModel)]="animal.species">
+                <option *ngFor="let option of speciesOptions" [value]="option.id">{{option.name}}</option>
+            </select>
+        </ng-container>
+    </div>
+
+    <div class="form-group">
+        <label for="breed">Breed:</label><br>
+        <ng-container *ngIf='breedOptions | async as breedOptions'>
+            <select class="form-control" id="breed" name="breed" [(ngModel)]="animal.breed">
+                <ng-container *ngFor="let option of breedOptions">
+                    <option [value]="option.id">{{option.name}}</option>
+                </ng-container>
+            </select>
+        </ng-container>
+    </div>
+
+    <div class="form-group">
+        <label for="birthDate">Birth Date</label><br>
+        <input class="form-control" type="date" id="birthDate" name="birthDate" [(ngModel)]="animal.birthDate">
+    </div>
+
+    <div class="form-group">
+        <label for="deathDate">Death Date</label><br>
+        <input class="form-control" type="date" id="deathDate" name="deathDate" [(ngModel)]="animal.deathDate">
+    </div>
+
+    <div class="form-group">
+        <label for="vaccinated">Vaccinated</label><br>
+        <select class="form-control" type="vaccinated" id="vaccinated" name="vaccinated"
+            [(ngModel)]="animal.vaccinated">
+            <option value="S">S</option>
+            <option value="N">N</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="sex">Sex</label><br>
+        <select class="form-control" type="sex" id="sex" name="sex" [(ngModel)]="animal.sex">
+            <option value="M">M</option>
+            <option value="F">F</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="sterilized">Sterilized</label><br>
+        <select class="form-control" type="sterilized" id="sterilized" name="sterilized" [(ngModel)]="animal.sterilized">
+            <option value="S">S</option>
+            <option value="N">N</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="weight">Weight</label><br>
+        <input class="form-control" type="number" id="weight" name="weight" [(ngModel)]="animal.weight">
+    </div>
+
+    <div class="form-group">
+        <label for="state">State:</label><br>
+        <ng-container *ngIf='stateOptions | async as stateOptions'>
+            <select class="form-control" id="state" name="state" [(ngModel)]="animal.state">
+                <ng-container *ngFor="let option of stateOptions">
+                    <option [value]="option.id">{{option.name}}</option>
+                </ng-container>
+            </select>
+        </ng-container>
+    </div>
+
+    <button type="button" class="btn bg-primary text-light" (click)="addAnimal()">Add Animal</button>
+
+
+</form>

@@ -1,0 +1,10 @@
+<div class="row">
+    <ng-container *ngIf='animals | async as animals'>
+<div *ngFor="let animal of animals" class="col-sm-12 col-md-5 col-lg-4">
+    <img *ngIf="animal.breed.species.id === 1"src="https://s3-us-west-2.amazonaws.com/melingoimages/Images/27866.jpg">
+    <img *ngIf="animal.breed.species.id === 2" src="https://aws.traveler.es/prod/designs/v1/assets/940x705/149323.jpg">
+    <p>{{animal.name}} {{animal | calculateAnimalYears}} years</p>
+    <p>{{animal.breed.name}}</p>
+</div>
+</ng-container>
+</div>
