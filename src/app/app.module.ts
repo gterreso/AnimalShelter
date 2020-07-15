@@ -13,7 +13,6 @@ import { AdministrationComponent } from './administration/administration.compone
 import { AdminAnimalComponent } from './admin-animals/admin-animals.component';
 import { AnimalAddComponent } from './animal-add/animal-add.component';
 import { CalculateAnimalYearsPipe } from './calculate-animal-years.pipe';
-import { AnimalEditComponent } from './animal-edit/animal-edit.component';
 
 
 
@@ -26,9 +25,7 @@ import { AnimalEditComponent } from './animal-edit/animal-edit.component';
     AdministrationComponent,
     AdminAnimalComponent,
     AnimalAddComponent,
-    CalculateAnimalYearsPipe,
-    AnimalEditComponent,
-    
+    CalculateAnimalYearsPipe, 
   ],
   imports: [
     BrowserModule,

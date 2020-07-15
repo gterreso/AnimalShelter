@@ -9,13 +9,11 @@ import { AdminAnimalComponent }  from './admin-animals/admin-animals.component';
 import { AnimalAddComponent }  from './animal-add/animal-add.component';
 
 
-
 const routes: Routes = [
   { path: '', redirectTo: '/animals', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'animals', component: PublicAnimalsListComponent },
   { path: 'admin/animal/add', component:AnimalAddComponent },
-  { path: 'admin/animal/edit/:id', component:AnimalAddComponent },
   { path: 'admin/animal', component: AdminAnimalComponent },
   { path: 'admin', component: AdministrationComponent },
   

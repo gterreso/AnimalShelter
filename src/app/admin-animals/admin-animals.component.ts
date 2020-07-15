@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AnimalService } from '../animal.service';
 import { Observable, of } from 'rxjs';
+
+import { AnimalService } from '../animal.service';
 
 @Component({
   selector: 'app-admin-animals',
@@ -15,7 +16,6 @@ export class AdminAnimalComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAnimalsList();
-    this.animals.subscribe(res=> console.log(res))
   }
 
   getAnimalsList() {

@@ -12,12 +12,14 @@ import { Router,ActivatedRoute } from '@angular/router';
 })
 export class AnimalAddComponent implements OnInit {
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private location:Location, private animalService:AnimalService) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private location:Location, private route: ActivatedRoute, private animalService:AnimalService) { }
 
+  //Si utilizo la interficie i no poso valors buits no funcionen els desplegables del html
   animal = {'id':null,'name':'','species':'','breed':'','birthDate':'','deathDate':'','vaccinated':'','sex':'','sterilized':'','weight':'','state':''};
   speciesOptions:Observable<any>;
   breedOptions:Observable<any>;
   stateOptions:Observable<any>;
+  success = false;
 
   ngOnInit(): void {
     this.getSpeciesOptions(); 
@@ -44,7 +46,10 @@ export class AnimalAddComponent implements OnInit {
   }
 
   addAnimal() {
-    this.animalService.addAnimal(this.animal).subscribe(res => console.log("res " + res));
+    this.animalService.addAnimal(this.animal).subscribe(res => {
+      this.success = true;
+      this.router.navigate(['..'], { relativeTo: this.route });
+    });
   }
 
 }
