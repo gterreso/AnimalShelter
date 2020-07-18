@@ -14,7 +14,7 @@ export class PublicAnimalsListComponent implements OnInit {
   constructor(private animalService:AnimalService) { }
 
   ngOnInit(): void {
-    this.animals = this.animalService.getAvailableAnimalsList();
+    this.animals = this.animalService.getAvailableList();
   }
 
 }

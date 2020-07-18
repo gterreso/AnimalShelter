@@ -19,7 +19,7 @@ export class AdminAnimalComponent implements OnInit {
   }
 
   getAnimalsList() {
-    this.animals = this.animalService.getAnimalsList();
+    this.animals = this.animalService.getAll();
   }
 
   delete(animal) {

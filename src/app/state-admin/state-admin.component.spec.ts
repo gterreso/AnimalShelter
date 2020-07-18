@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AnimalAddComponent } from './animal-add.component';
+import { StateAdminComponent } from './state-admin.component';
 
-describe('AnimalAddComponent', () => {
-  let component: AnimalAddComponent;
-  let fixture: ComponentFixture<AnimalAddComponent>;
+describe('StatusAdminComponent', () => {
+  let component: StateAdminComponent;
+  let fixture: ComponentFixture<StateAdminComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AnimalAddComponent ]
+      declarations: [ StateAdminComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AnimalAddComponent);
+    fixture = TestBed.createComponent(StateAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

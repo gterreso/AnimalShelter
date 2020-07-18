@@ -1,23 +1,17 @@
-<div *ngIf="success" class="alert alert-success" role="alert">
-    <h4 class="alert-heading">Well done!</h4>
-    <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-    <hr>
-    <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-  </div>
-
 <a class="btn bg-primary text-light" (click)="backButton()">Back</a>
 <br>
 <br>
-<form>
+
+<form [formGroup]="animalForm">
     <div class="form-group">
         <label for="name">Name:</label><br>
-        <input class="form-control" type="text" id="name" name="name" [(ngModel)]="animal.name">
+        <input class="form-control" type="text" id="name" name="name" formControlName="name">
     </div>
 
     <div class="form-group">
         <label for="species">Species:</label><br>
         <ng-container *ngIf='speciesOptions | async as speciesOptions'>
-            <select class="form-control" id="species" name="name" [(ngModel)]="animal.species">
+            <select  class="form-control" id="species" name="name" formControlName="species">
                 <option *ngFor="let option of speciesOptions" [value]="option.id">{{option.name}}</option>
             </select>
         </ng-container>
@@ -26,9 +20,9 @@
     <div class="form-group">
         <label for="breed">Breed:</label><br>
         <ng-container *ngIf='breedOptions | async as breedOptions'>
-            <select class="form-control" id="breed" name="breed" [(ngModel)]="animal.breed">
+            <select class="form-control" id="breed" name="breed" formControlName="breed">
                 <ng-container *ngFor="let option of breedOptions">
-                    <option [value]="option.id">{{option.name}}</option>
+                    <option *ngIf="animalForm.get('species').value == option.species.id" [value]="option.id">{{option.name}}</option>
                 </ng-container>
             </select>
         </ng-container>
@@ -36,18 +30,18 @@
 
     <div class="form-group">
         <label for="birthDate">Birth Date</label><br>
-        <input class="form-control" type="date" id="birthDate" name="birthDate" [(ngModel)]="animal.birthDate">
+        <input class="form-control" type="date" id="birthDate" name="birthDate" formControlName="birthDate">
     </div>
 
     <div class="form-group">
         <label for="deathDate">Death Date</label><br>
-        <input class="form-control" type="date" id="deathDate" name="deathDate" [(ngModel)]="animal.deathDate">
+        <input class="form-control" type="date" id="deathDate" name="deathDate" formControlName="deathDate">
     </div>
 
     <div class="form-group">
         <label for="vaccinated">Vaccinated</label><br>
         <select class="form-control" type="vaccinated" id="vaccinated" name="vaccinated"
-            [(ngModel)]="animal.vaccinated">
+            formControlName="vaccinated">
             <option value="S">S</option>
             <option value="N">N</option>
         </select>
@@ -55,7 +49,7 @@
 
     <div class="form-group">
         <label for="sex">Sex</label><br>
-        <select class="form-control" type="sex" id="sex" name="sex" [(ngModel)]="animal.sex">
+        <select class="form-control" type="sex" id="sex" name="sex" formControlName="sex">
             <option value="M">M</option>
             <option value="F">F</option>
         </select>
@@ -63,7 +57,7 @@
 
     <div class="form-group">
         <label for="sterilized">Sterilized</label><br>
-        <select class="form-control" type="sterilized" id="sterilized" name="sterilized" [(ngModel)]="animal.sterilized">
+        <select class="form-control" type="sterilized" id="sterilized" name="sterilized" formControlName="sterilized">
             <option value="S">S</option>
             <option value="N">N</option>
         </select>
@@ -71,13 +65,13 @@
 
     <div class="form-group">
         <label for="weight">Weight</label><br>
-        <input class="form-control" type="number" id="weight" name="weight" [(ngModel)]="animal.weight">
+        <input class="form-control" type="number" id="weight" name="weight" formControlName="weight">
     </div>
 
     <div class="form-group">
         <label for="state">State:</label><br>
         <ng-container *ngIf='stateOptions | async as stateOptions'>
-            <select class="form-control" id="state" name="state" [(ngModel)]="animal.state">
+            <select class="form-control" id="state" name="state" formControlName="state">
                 <ng-container *ngFor="let option of stateOptions">
                     <option [value]="option.id">{{option.name}}</option>
                 </ng-container>
@@ -85,7 +79,9 @@
         </ng-container>
     </div>
 
-    <button type="button" class="btn bg-primary text-light" (click)="addAnimal()">Add Animal</button>
+    <button type="button" class="btn bg-primary text-light" (click)="add()" *ngIf="!editing" [disabled]="animalForm.status === 'INVALID'">Add Animal</button>
+    <button type="button" class="btn bg-primary text-light" (click)="edit()" *ngIf="editing" [disabled]="animalForm.status === 'INVALID'">Save Animal</button>
+
 
 
 </form>

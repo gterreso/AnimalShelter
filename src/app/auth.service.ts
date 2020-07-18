@@ -9,13 +9,16 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient,private router: Router) { }
+  loggedIn:boolean = false;
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   makeLogin(loginData) {
     this.http.post<Object>("http://localhost:3000/api/auth/login",loginData).subscribe(res => { 
       sessionStorage.setItem('api_token',res['access_token']);
       localStorage.setItem('credentials',JSON.stringify(loginData));
-      //TODO change this redirect to the place it deserves
+      
+      this.loggedIn = true;
       this.router.navigate(['/admin']);
     });
     return true;
@@ -23,11 +26,13 @@ export class AuthService {
 
   getToken() {
     let token =  sessionStorage.getItem('api_token');
-    console.log("token");
+    console.log("token " + token);
     return token;
   }
 
-  getTest() {
-    return this.http.get("https://jsonplaceholder.typicode.com/todos");
+  logout() {
+    sessionStorage.setItem('api_token',"");
+    this.loggedIn = false;
+    this.router.navigate(['/login']);
   }
 }

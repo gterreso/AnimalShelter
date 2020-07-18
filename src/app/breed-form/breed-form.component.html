@@ -1,0 +1,23 @@
+<a class="btn bg-primary text-light" (click)="backButton()">Back</a>
+<br>
+<br>
+<form [formGroup]="breedForm">
+    <div class="form-group">
+        <label for="name">Name:</label><br>
+        <input class="form-control" type="text" id="name" name="name" formControlName="name">
+    </div>
+
+    <div class="form-group">
+        <label for="species">Species:</label><br>
+        <ng-container *ngIf='speciesOptions | async as speciesOptions$'>
+            <select  class="form-control" id="species" name="species" formControlName="species">
+                <option *ngFor="let option of speciesOptions$" [value]="option.id">{{option.name}}</option>
+            </select>
+        </ng-container>
+    </div>
+
+
+    <button type="button" class="btn bg-primary text-light" (click)="add()" *ngIf="!editing">Add Species</button>
+    <button type="button" class="btn bg-primary text-light" (click)="edit()" *ngIf="editing">Save Species</button>
+
+</form>

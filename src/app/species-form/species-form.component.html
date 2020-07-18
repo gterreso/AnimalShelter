@@ -1,0 +1,14 @@
+<a class="btn bg-primary text-light" (click)="backButton()">Back</a>
+<br>
+<br>
+<form [formGroup]="speciesForm">
+    <div class="form-group">
+        <label for="name">Name:</label><br>
+        <input class="form-control" type="text" id="name" name="name" formControlName="name">
+    </div>
+
+
+    <button type="button" class="btn bg-primary text-light" (click)="add()" *ngIf="!editing">Add Species</button>
+    <button type="button" class="btn bg-primary text-light" (click)="edit()" *ngIf="editing">Save Species</button>
+
+</form>
