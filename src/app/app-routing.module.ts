@@ -13,6 +13,7 @@ import { BreedFormComponent } from './breed-form/breed-form.component';
 import { StateAdminComponent } from './state-admin/state-admin.component';
 import { StateFormComponent } from './state-form/state-form.component';
 import { AnimalFormComponent } from './animal-form/animal-form.component';
+import { AdminFilesComponent } from './admin-files/admin-files.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'admin/state', component: StateAdminComponent },
   { path: 'admin/state/add', component: StateFormComponent },
   { path: 'admin/state/edit/:id', component: StateFormComponent },
+  { path: 'admin/animal/files/:id', component:AdminFilesComponent },
   { path: 'admin', component: AdministrationComponent },
   
 ];

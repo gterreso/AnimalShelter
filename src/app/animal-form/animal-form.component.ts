@@ -15,6 +15,8 @@ import { StateService } from '../state.service';
 })
 export class AnimalFormComponent implements OnInit {
 
+  imgBaseUrl = "http://localhost:3000/resources/img/"
+
   animalForm = new FormGroup({
     id: new FormControl(''),
     name: new FormControl('',Validators.required),
@@ -29,12 +31,13 @@ export class AnimalFormComponent implements OnInit {
     state: new FormControl('')
   });
 
+  temporalPhotos = [];
+
   editing:boolean;
 
   speciesOptions:Observable<any>;
   breedOptions:Observable<any>;
   stateOptions:Observable<any>;
-
 
   constructor(private router: Router,private route: ActivatedRoute, private location:Location, private animalService: AnimalService, private speciesService: SpeciesService, private breedService: BreedService, private stateService: StateService) {
     
@@ -78,12 +81,19 @@ export class AnimalFormComponent implements OnInit {
       sex: res.sex,
       state: res.state.id
     });
+    this.temporalPhotos = res.photos.map((photo) => {
+      photo.resource = this.imgBaseUrl + photo.resource
+      return photo
+    });
+
+    console.log(this.temporalPhotos)
   }
 
   add() {
     let animal = this.animalForm.value;
     delete animal.species;
-    console.log(animal);
+
+
     this.animalService.add(animal).subscribe(res => {
       if (res.status == 201) {
         this.router.navigate(['../..'], { relativeTo: this.route });
@@ -95,6 +105,8 @@ export class AnimalFormComponent implements OnInit {
   edit() {
     let animal = this.animalForm.value;
     delete animal.species;
+
+
     console.log(animal);
     this.animalService.edit(animal).subscribe(res => {
       if (res.status == 201) {
@@ -116,5 +128,7 @@ export class AnimalFormComponent implements OnInit {
   getStateOptions() {
     this.stateOptions = this.stateService.getAll();
   }
+
+
 
 }

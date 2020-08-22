@@ -66,4 +66,5 @@ export class AnimalService {
 
     return this.http.delete<any>("http://localhost:3000/api/animal/"+animal.id,{'headers':headers, observe: 'response'});
   }
+
 }

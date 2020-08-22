@@ -19,6 +19,7 @@ import { BreedFormComponent } from './breed-form/breed-form.component';
 import { StateAdminComponent } from './state-admin/state-admin.component';
 import { StateFormComponent } from './state-form/state-form.component';
 import { AnimalFormComponent } from './animal-form/animal-form.component';
+import { AdminFilesComponent } from './admin-files/admin-files.component';
 
 
 
@@ -39,7 +40,8 @@ import { AnimalFormComponent } from './animal-form/animal-form.component';
     BreedFormComponent,
     StateAdminComponent,
     StateFormComponent,
-    AnimalFormComponent, 
+    AnimalFormComponent,
+    AdminFilesComponent, 
   ],
   imports: [
     BrowserModule,

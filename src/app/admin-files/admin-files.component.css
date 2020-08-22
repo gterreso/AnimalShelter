@@ -1,0 +1,9 @@
+.fileSelected {
+    padding:15px;
+    background-color: darkgrey;
+}
+
+.file {
+    padding:15px;
+    background-color: white;
+}

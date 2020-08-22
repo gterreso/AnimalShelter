@@ -1,0 +1,17 @@
+<label for="photos">Photos:</label>
+<input type="file" class="form-control" id="file" (change)="addedFile($event)" multiple>
+
+<button (click)="uploadFiles()">Upload</button>
+
+<br>
+<br>
+<br>
+
+<span>Actions</span>
+<button (click)="deleteFile()">Delete File</button>
+
+<br>
+<br>
+
+    <img *ngFor='let file of files' [src]="file.url" height="150" width="200px" [ngClass]="{'fileSelected': file === selectedFile, 'file':file !== selectedFile }" (click)="selectFile($event,file)"> <br />
+
