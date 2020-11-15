@@ -80,8 +80,8 @@
     </div>
 
         
-
-
+<button class="btn bg-primary text-light" *ngIf="!editing" (click)="add()">Add</button>
+<button class="btn bg-primary text-light" *ngIf="editing" (click)="edit()">Edit</button>
     
 
 

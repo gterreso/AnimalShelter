@@ -37,7 +37,7 @@ export class AnimalService {
       'Pragma': 'no-cache',
       'Expires': '0'
     });
-    return this.http.get("http://localhost:3000/api/animal/available",{'headers':headers});
+    return this.http.get("http://localhost:3000/api/animal/available/main-image",{'headers':headers});
   }
 
 

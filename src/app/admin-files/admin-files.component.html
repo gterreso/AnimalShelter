@@ -9,9 +9,13 @@
 
 <span>Actions</span>
 <button (click)="deleteFile()">Delete File</button>
+<button (click)="setMainImage()" [hidden]="selectedFile.type!=='image'">Set Image as Main Image</button>
 
 <br>
 <br>
 
-    <img *ngFor='let file of files' [src]="file.url" height="150" width="200px" [ngClass]="{'fileSelected': file === selectedFile, 'file':file !== selectedFile }" (click)="selectFile($event,file)"> <br />
+    <div *ngFor='let file of files' style="display:inline-block">
+        <img  [src]="file.url" height="150" width="200px" [ngClass]="{'fileSelected': file === selectedFile, 'file':file !== selectedFile }" (click)="selectFile($event,file)">
+        <div>{{file.filename}}</div>
+    </div>
 

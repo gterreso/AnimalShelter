@@ -8,6 +8,8 @@ import { AuthService } from './auth.service';
 })
 export class AdminFilesService {
 
+  domain:string = "http://localhost:3000/api/";
+
 
   constructor(private http:HttpClient, private authService:AuthService) { }
 
@@ -16,29 +18,37 @@ export class AdminFilesService {
 
   }
 
-  getAll(idAnimal):Observable<any> {
+  getAll(folderName):Observable<any> {
+    let url = this.domain + "animal/files/" + folderName;
+
+
     let headers = new HttpHeaders({
-      /*"Content-Type": "multipart/form-data",*/
+      'Cache-Control':  'no-cache, no-store, must-revalidate, post-check=0, pre-check=0',
+      'Pragma': 'no-cache',
+      'Expires': '0',
       'Authorization':'Bearer ' + this.authService.getToken()
     });
 
-    return this.http.get<any>("http://localhost:3000/api/animal/files/"+idAnimal,{'headers':headers, observe: 'response'});
+    return this.http.get<any>(url, {'headers':headers, observe: 'response'});
   }
 
 
   
-  upload(folderName,data):Observable<any> {
+  upload(folderName, data):Observable<any> {
+
+    let url = this.domain + "animal/files/" + folderName;
+
     let headers = new HttpHeaders({
       /*"Content-Type": "multipart/form-data",*/
       'Authorization':'Bearer ' + this.authService.getToken()
     });
 
-    return this.http.post<any>("http://localhost:3000/api/animal/files/"+folderName,data,{'headers':headers, observe: 'response'});
+    return this.http.post<any>(url, data,{'headers':headers, observe: 'response'});
   }
 
   delete(folderName,files) {
 
-    let url = "http://localhost:3000/api/animal/files/" + folderName;
+    let url = this.domain + "animal/files/" + folderName;
 
     //By now we can select 1 file, for this reason I create this array here, in the future this array must be deleted and used in component
     let filesArray = [files.filename];
@@ -54,6 +64,20 @@ export class AdminFilesService {
   };
 
     return this.http.delete<any>(url,httpOptions);
+  }
+
+  setMainImage(folderName, imageName) {
+    
+    let url = this.domain + "animal/files/main/" + folderName;
+
+    let headers = new HttpHeaders({
+      /*"Content-Type": "multipart/form-data",*/
+      'Authorization':'Bearer ' + this.authService.getToken()
+    });
+
+    let requestData = {"name": imageName};
+
+    return this.http.post<any>(url, requestData,{'headers':headers, observe: 'response'});
   }
 
 }

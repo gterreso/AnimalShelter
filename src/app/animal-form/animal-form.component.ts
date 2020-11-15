@@ -81,12 +81,6 @@ export class AnimalFormComponent implements OnInit {
       sex: res.sex,
       state: res.state.id
     });
-    this.temporalPhotos = res.photos.map((photo) => {
-      photo.resource = this.imgBaseUrl + photo.resource
-      return photo
-    });
-
-    console.log(this.temporalPhotos)
   }
 
   add() {
@@ -109,7 +103,7 @@ export class AnimalFormComponent implements OnInit {
 
     console.log(animal);
     this.animalService.edit(animal).subscribe(res => {
-      if (res.status == 201) {
+      if (res.status == 200) {
         this.router.navigate(['../..'], { relativeTo: this.route });
 
       }

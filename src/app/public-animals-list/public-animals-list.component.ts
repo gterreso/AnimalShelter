@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class PublicAnimalsListComponent implements OnInit {
 
   animals:Observable<any>;
+  resourcesUrl = "http://localhost:3000/resources/files/";
 
   constructor(private animalService:AnimalService) { }
 

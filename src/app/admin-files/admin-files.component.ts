@@ -14,7 +14,7 @@ export class AdminFilesComponent implements OnInit {
   files:Observable<any>;
   fileToUpload:any;
   resourcesUrl = "http://localhost:3000/resources/files/";
-  selectedFile = "";
+  selectedFile = {"filename":"", "url":"", "type": ""};
 
   constructor(private adminFilesService:AdminFilesService, private route: ActivatedRoute, private el: ElementRef) { 
     this.route.params.subscribe(params => {
@@ -32,7 +32,7 @@ export class AdminFilesComponent implements OnInit {
 
   getFileType(name) {
     let splitted = name.split(".");
-    let extension = splitted[splitted.length - 1]
+    let extension = splitted[splitted.length - 1].toLowerCase()
 
     if (extension == "jpg" || extension == "png") {
       return "image";
@@ -45,7 +45,7 @@ export class AdminFilesComponent implements OnInit {
 
       for (let i=0; i < res.body.length; i++) {
         let name = res.body[i];
-       res.body[i] = {filename:name, "url":this.resourcesUrl + this.animalId + "/" + name, "type": this.getFileType(name)};
+       res.body[i] = {"filename":name, "url":this.resourcesUrl + this.animalId + "/" + name, "type": this.getFileType(name)};
       }
 
       this.files = res.body;
@@ -61,7 +61,7 @@ export class AdminFilesComponent implements OnInit {
             formData.append('files', inputEl.files.item(i));
         }
         this.adminFilesService.upload(this.animalId,  formData).subscribe((res) => {
-          console.log(res);
+          this.getAll();
         });
   }
 }
@@ -96,6 +96,12 @@ selectFile(event, file) {
 
 deleteFile() {
   this.adminFilesService.delete(this.animalId, this.selectedFile).subscribe((res)=> {
+    this.getAll();
+  });
+}
+
+setMainImage() {
+  this.adminFilesService.setMainImage(this.animalId, this.selectedFile.filename).subscribe((res)=> {
     this.getAll();
   });
 }
