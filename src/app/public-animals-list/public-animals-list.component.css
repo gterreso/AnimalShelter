@@ -2,3 +2,11 @@
     width: 100%;
     max-height: 403px;
 }
+
+.filterContainer {
+    border:1px solid blue;
+}
+
+.animalsContainer {
+    border:1px solid red;
+}

@@ -1,4 +1,20 @@
 <div class="row">
+<div class="filterContainer col-lg-2">
+<p>Filter By:</p>
+
+<span>Breeds:</span>
+<br>
+<ng-container *ngFor="let breed of breeds | async as breeds">
+    <input type="checkbox" id="{{breed.name}}" name="breed" value="{{breed.id}}">
+    <label for="{{breed.name}}">{{breed.name}}</label><br>
+</ng-container>
+
+<button type="button" class="btn btn-primary">Filter</button>
+
+</div>
+
+<div class="animalsContainer col-lg-10">
+    <div class="row">
     <ng-container *ngIf='animals | async as animals'>
         <div *ngFor="let animal of animals" class="col-sm-12 col-md-5 col-lg-4">
             <ng-container *ngIf="animal.photos.length === 1">
@@ -16,3 +32,30 @@
         </div>
     </ng-container>
 </div>
+</div>
+
+
+
+</div>
+
+
+<!--
+<div class="row">
+    <ng-container *ngIf='animals | async as animals'>
+        <div *ngFor="let animal of animals" class="col-sm-12 col-md-5 col-lg-4">
+            <ng-container *ngIf="animal.photos.length === 1">
+                <img src='{{resourcesUrl + animal.id + "/" + animal.photos[0]}}'>
+            </ng-container>
+
+            <ng-container *ngIf="animal.photos.length < 1">
+                <img *ngIf="animal.breed.species.id === 1"
+                    src="https://s3-us-west-2.amazonaws.com/melingoimages/Images/27866.jpg">
+                <img *ngIf="animal.breed.species.id === 2"
+                    src="https://aws.traveler.es/prod/designs/v1/assets/940x705/149323.jpg">
+                <p>{{animal.name}} {{animal | calculateAnimalYears}} years</p>
+                <p>{{animal.breed.name}}</p>
+            </ng-container>
+        </div>
+    </ng-container>
+</div>
+-->
