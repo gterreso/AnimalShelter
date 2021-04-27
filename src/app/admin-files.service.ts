@@ -3,13 +3,12 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
+import {apiUrl} from './constants';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AdminFilesService {
-
-  domain:string = "http://localhost:3000/api/";
-
 
   constructor(private http:HttpClient, private authService:AuthService) { }
 
@@ -19,7 +18,7 @@ export class AdminFilesService {
   }
 
   getAll(folderName):Observable<any> {
-    let url = this.domain + "animal/files/" + folderName;
+    let url = apiUrl + "animal/files/" + folderName;
 
 
     let headers = new HttpHeaders({
@@ -36,7 +35,7 @@ export class AdminFilesService {
   
   upload(folderName, data):Observable<any> {
 
-    let url = this.domain + "animal/files/" + folderName;
+    let url = apiUrl + "animal/files/" + folderName;
 
     let headers = new HttpHeaders({
       /*"Content-Type": "multipart/form-data",*/
@@ -48,7 +47,7 @@ export class AdminFilesService {
 
   delete(folderName,files) {
 
-    let url = this.domain + "animal/files/" + folderName;
+    let url = apiUrl + "animal/files/" + folderName;
 
     //By now we can select 1 file, for this reason I create this array here, in the future this array must be deleted and used in component
     let filesArray = [files.filename];
@@ -68,7 +67,7 @@ export class AdminFilesService {
 
   setMainImage(folderName, imageName) {
     
-    let url = this.domain + "animal/files/main/" + folderName;
+    let url = apiUrl + "animal/files/main/" + folderName;
 
     let headers = new HttpHeaders({
       /*"Content-Type": "multipart/form-data",*/

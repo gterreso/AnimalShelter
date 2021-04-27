@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 
+import {apiUrl} from './constants';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,11 +14,11 @@ export class BreedService {
 
   
   getAll():Observable<any> {
-    return this.http.get("http://localhost:3000/api/breed");
+    return this.http.get(apiUrl+"breed");
   }
 
   getById(id):Observable<any> {
-    return this.http.get("http://localhost:3000/api/breed/"+id);
+    return this.http.get(apiUrl + "breed/"+id);
   }
 
 
@@ -26,7 +28,7 @@ export class BreedService {
       'Authorization':'Bearer ' + this.authService.getToken()
     });
 
-    return this.http.post<any>("http://localhost:3000/api/breed/",breed,{'headers':headers, observe: 'response'});
+    return this.http.post<any>(apiUrl + "breed/",breed,{'headers':headers, observe: 'response'});
   }
 
   edit(breed) {
@@ -34,7 +36,7 @@ export class BreedService {
       'Content-Type': 'application/json',
       'Authorization':'Bearer ' + this.authService.getToken()
     });
-    return this.http.put<any>("http://localhost:3000/api/breed/"+breed.id, breed,{'headers':headers, observe: 'response'});
+    return this.http.put<any>(apiUrl + "breed/"+breed.id, breed,{'headers':headers, observe: 'response'});
   }
 
   delete(id) {
@@ -43,6 +45,6 @@ export class BreedService {
       'Authorization':'Bearer ' + this.authService.getToken()
     });
 
-    return this.http.delete<any>("http://localhost:3000/api/breed/"+id, {'headers':headers, observe: 'response'});
+    return this.http.delete<any>(apiUrl + "breed/"+id, {'headers':headers, observe: 'response'});
   }
 }

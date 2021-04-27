@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 
+import {apiUrl} from './constants';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +20,7 @@ export class SpeciesService {
     'Expires': '0'
   });
 
-    return this.http.get("http://localhost:3000/api/species",{'headers':headers});
+    return this.http.get(apiUrl + "species/",{'headers':headers});
   }
 
   getById(id):Observable<any> {
@@ -28,7 +30,7 @@ export class SpeciesService {
       'Expires': '0'
     });
 
-    return this.http.get("http://localhost:3000/api/species/"+id,{'headers':headers});
+    return this.http.get(apiUrl + "species/"+id,{'headers':headers});
   }
 
 
@@ -38,7 +40,7 @@ export class SpeciesService {
       'Authorization':'Bearer ' + this.authService.getToken()
     });
 
-    return this.http.post<any>("http://localhost:3000/api/species/",species,{'headers':headers, observe: 'response'});
+    return this.http.post<any>(apiUrl + "species/",species,{'headers':headers, observe: 'response'});
   }
 
   edit(species) {
@@ -46,7 +48,7 @@ export class SpeciesService {
       'Content-Type': 'application/json',
       'Authorization':'Bearer ' + this.authService.getToken()
     });
-    return this.http.put<any>("http://localhost:3000/api/species/"+species.id,species,{'headers':headers, observe: 'response'});
+    return this.http.put<any>(apiUrl + "species/"+species.id,species,{'headers':headers, observe: 'response'});
   }
 
   delete(id) {
@@ -55,6 +57,6 @@ export class SpeciesService {
       'Authorization':'Bearer ' + this.authService.getToken()
     });
 
-    return this.http.delete<any>("http://localhost:3000/api/species/"+id, {'headers':headers, observe: 'response'});
+    return this.http.delete<any>(apiUrl + "species/"+id, {'headers':headers, observe: 'response'});
   }
 }

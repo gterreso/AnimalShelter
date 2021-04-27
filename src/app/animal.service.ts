@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
+import {apiUrl} from './constants';
 
 
 @Injectable({
@@ -19,7 +20,7 @@ export class AnimalService {
       'Expires': '0'
     });
 
-    return this.http.get("http://localhost:3000/api/animal",{'headers':headers});
+    return this.http.get(apiUrl + "animal",{'headers':headers});
   }
 
   getById(id):Observable<any> {
@@ -28,7 +29,7 @@ export class AnimalService {
       'Pragma': 'no-cache',
       'Expires': '0'
     });
-    return this.http.get("http://localhost:3000/api/animal/"+id,{'headers':headers});
+    return this.http.get(apiUrl + "animal/"+id,{'headers':headers});
   }
 
   getAvailableList():Observable<any> {
@@ -37,7 +38,7 @@ export class AnimalService {
       'Pragma': 'no-cache',
       'Expires': '0'
     });
-    return this.http.get("http://localhost:3000/api/animal/available/main-image",{'headers':headers});
+    return this.http.get(apiUrl + "animal/available/main-image",{'headers':headers});
   }
 
 
@@ -47,7 +48,7 @@ export class AnimalService {
       'Authorization':'Bearer ' + this.authService.getToken()
     });
 
-    return this.http.post<any>("http://localhost:3000/api/animal/",animal,{'headers':headers, observe: 'response'});
+    return this.http.post<any>(apiUrl + "animal/",animal,{'headers':headers, observe: 'response'});
   }
 
   edit(animal) {
@@ -55,7 +56,7 @@ export class AnimalService {
       'Content-Type': 'application/json',
       'Authorization':'Bearer ' + this.authService.getToken()
     });
-    return this.http.put<any>("http://localhost:3000/api/animal/"+animal.id,animal,{'headers':headers, observe: 'response'});
+    return this.http.put<any>(apiUrl + "animal/"+animal.id,animal,{'headers':headers, observe: 'response'});
   }
 
   delete(animal) {
@@ -64,7 +65,7 @@ export class AnimalService {
       'Authorization':'Bearer ' + this.authService.getToken()
     });
 
-    return this.http.delete<any>("http://localhost:3000/api/animal/"+animal.id,{'headers':headers, observe: 'response'});
+    return this.http.delete<any>(apiUrl + "animal/"+animal.id,{'headers':headers, observe: 'response'});
   }
 
 }

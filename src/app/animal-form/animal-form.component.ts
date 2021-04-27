@@ -8,6 +8,8 @@ import { SpeciesService } from '../species.service';
 import { BreedService } from '../breed.service';
 import { StateService } from '../state.service';
 
+import {baseUrl} from '../constants';
+
 @Component({
   selector: 'app-animal-form',
   templateUrl: './animal-form.component.html',
@@ -15,7 +17,7 @@ import { StateService } from '../state.service';
 })
 export class AnimalFormComponent implements OnInit {
 
-  imgBaseUrl = "http://localhost:3000/resources/img/"
+  imgBaseUrl = baseUrl + "resources/img/"
 
   animalForm = new FormGroup({
     id: new FormControl(''),

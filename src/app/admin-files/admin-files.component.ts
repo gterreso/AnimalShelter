@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { AdminFilesService } from '../admin-files.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { baseUrl } from '../constants';
 
 @Component({
   selector: 'app-admin-files',
@@ -13,7 +14,7 @@ export class AdminFilesComponent implements OnInit {
   animalId:number;
   files:Observable<any>;
   fileToUpload:any;
-  resourcesUrl = "http://localhost:3000/resources/files/";
+  resourcesUrl = baseUrl +"/resources/files/";
   selectedFile = {"filename":"", "url":"", "type": ""};
 
   constructor(private adminFilesService:AdminFilesService, private route: ActivatedRoute, private el: ElementRef) { 

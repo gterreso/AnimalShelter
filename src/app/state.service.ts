@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 
+import {apiUrl} from './constants';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,11 +20,11 @@ export class StateService {
       'Expires': '0'
     });
 
-    return this.http.get("http://localhost:3000/api/state/",{'headers':headers});
+    return this.http.get(apiUrl + "state/",{'headers':headers});
   }
 
   getById(id):Observable<any> {
-    return this.http.get("http://localhost:3000/api/state/"+id);
+    return this.http.get(apiUrl + "state/"+id);
   }
 
 
@@ -32,7 +34,7 @@ export class StateService {
       'Authorization':'Bearer ' + this.authService.getToken()
     });
 
-    return this.http.post<any>("http://localhost:3000/api/state/",state,{'headers':headers, observe: 'response'});
+    return this.http.post<any>(apiUrl + "state/",state,{'headers':headers, observe: 'response'});
   }
 
   edit(state) {
@@ -40,7 +42,7 @@ export class StateService {
       'Content-Type': 'application/json',
       'Authorization':'Bearer ' + this.authService.getToken()
     });
-    return this.http.put<any>("http://localhost:3000/api/state/"+state.id, state,{'headers':headers, observe: 'response'});
+    return this.http.put<any>(apiUrl + "state/"+state.id, state,{'headers':headers, observe: 'response'});
   }
 
   delete(id) {
@@ -49,6 +51,6 @@ export class StateService {
       'Authorization':'Bearer ' + this.authService.getToken(),
     });
 
-    return this.http.delete<any>("http://localhost:3000/api/state/"+id, {'headers':headers, observe: 'response'});
+    return this.http.delete<any>(apiUrl + "state/"+id, {'headers':headers, observe: 'response'});
   }
 }

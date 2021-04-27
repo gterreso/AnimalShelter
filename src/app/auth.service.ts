@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
+import {apiUrl} from './constants';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +16,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   makeLogin(loginData) {
-    this.http.post<Object>("http://localhost:3000/api/auth/login",loginData).subscribe(res => { 
+    this.http.post<Object>(apiUrl + "auth/login",loginData).subscribe(res => { 
       sessionStorage.setItem('api_token',res['access_token']);
       localStorage.setItem('credentials',JSON.stringify(loginData));
       
