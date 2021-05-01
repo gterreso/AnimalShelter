@@ -8,7 +8,7 @@ import { SpeciesService } from '../species.service';
 import { BreedService } from '../breed.service';
 import { StateService } from '../state.service';
 
-import {baseUrl} from '../constants';
+import {serverBaseUrl} from '../constants';
 
 @Component({
   selector: 'app-animal-form',
@@ -17,7 +17,7 @@ import {baseUrl} from '../constants';
 })
 export class AnimalFormComponent implements OnInit {
 
-  imgBaseUrl = baseUrl + "resources/img/"
+  imgBaseUrl = serverBaseUrl + "resources/img/"
 
   animalForm = new FormGroup({
     id: new FormControl(''),
@@ -89,6 +89,12 @@ export class AnimalFormComponent implements OnInit {
     let animal = this.animalForm.value;
     delete animal.species;
 
+    for (var prop in animal) {
+      if (Object.prototype.hasOwnProperty.call(animal, prop) && animal[prop].length == 0) {
+          animal[prop] = null;
+      }
+  }
+
 
     this.animalService.add(animal).subscribe(res => {
       if (res.status == 201) {
@@ -101,6 +107,12 @@ export class AnimalFormComponent implements OnInit {
   edit() {
     let animal = this.animalForm.value;
     delete animal.species;
+
+    for (var prop in animal) {
+      if (Object.prototype.hasOwnProperty.call(animal, prop) && animal[prop].length == 0) {
+          animal[prop] = null;
+      }
+  }
 
 
     console.log(animal);

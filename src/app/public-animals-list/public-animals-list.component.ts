@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AnimalService } from '../animal.service';
 import { Observable } from 'rxjs';
 import { BreedService } from '../breed.service';
-import { baseUrl } from '../constants';
+import { serverBaseUrl } from '../constants';
 
 @Component({
   selector: 'app-public-animals-list',
@@ -14,7 +14,7 @@ export class PublicAnimalsListComponent implements OnInit {
   animals:Observable<any>;
   breeds:Observable<any>;
 
-  resourcesUrl = baseUrl + "resources/files/";
+  resourcesUrl = serverBaseUrl + "resources/files/";
 
   constructor(private animalService:AnimalService, private breedService:BreedService) { }
 
